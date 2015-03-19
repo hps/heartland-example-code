@@ -10,5 +10,6 @@ class HpsSdkCodes {
                     $invalidAmount                      = "7",
                     $reversalErrorAfterGatewayTimeout   = "8",
                     $reversalErrorAfterIssuerTimeout    = "9",
-                    $processingError                    = "10";
+                    $processingError                    = "10",
+                    $invalidConfig                      = "11";
 }

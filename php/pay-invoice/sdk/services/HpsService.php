@@ -1,19 +1,20 @@
 <?php
 
 class HpsService {
-    public $exceptionMapper    = null,
-            $config             = null;
+    public $config = null;
+    protected $_amount = null;
+    protected $_currency = null;
+    protected $_filterBy = null;
 
-    public function __construct(HpsConfiguration $config=null){
+    public function __construct(HpsServicesConfig $config=null){
         if($config != null){
             $this->config = $config;
         }
-        $this->exceptionMapper = new HpsExceptionMapper();
     }
 
-    public function doTransaction($transaction){
+    public function doTransaction($transaction,$clientTransactionId=null){
         if($this->_configurationInvalid()){
-            throw $this->exceptionMapper->map_sdk_exception(HpsSdkCodes::$invalidTransactionId);
+            throw HpsExceptionMapper::map_sdk_exception(HpsSdkCodes::$invalidConfig);
         }
 
         $xml = new DOMDocument('1.0', 'utf-8');
@@ -29,16 +30,19 @@ class HpsService {
                         if ($this->config->secretApiKey != NULL && $this->config->secretApiKey != ""){
                             $hpsHeader->appendChild($xml->createElement('hps:SecretAPIKey',$this->config->secretApiKey));
                         }else{
-                            $hpsHeader->appendChild($xml->createElement('hps:UserName',$this->config->userName));
-                            $hpsHeader->appendChild($xml->createElement('hps:Password',$this->config->password));
+                            $hpsHeader->appendChild($xml->createElement('hps:SiteId',$this->config->siteId));
                             $hpsHeader->appendChild($xml->createElement('hps:DeviceId',$this->config->deviceId));
                             $hpsHeader->appendChild($xml->createElement('hps:LicenseId',$this->config->licenseId));
-                            $hpsHeader->appendChild($xml->createElement('hps:SiteId',$this->config->siteId));
+                            $hpsHeader->appendChild($xml->createElement('hps:UserName',$this->config->userName));
+                            $hpsHeader->appendChild($xml->createElement('hps:Password',$this->config->password));
                         }
                         if ($this->config->developerId != null && $this->config->developerId != ""){
                             $hpsHeader->appendChild($xml->createElement('hps:DeveloperID',$this->config->developerId));
                             $hpsHeader->appendChild($xml->createElement('hps:VersionNbr',$this->config->versionNumber));
                             $hpsHeader->appendChild($xml->createElement('hps:SiteTrace',$this->config->siteTrace));
+                        }
+                        if ($clientTransactionId != null){
+                            $hpsHeader->appendChild($xml->createElement('hps:ClientTxnId', $clientTransactionId));
                         }
 
                 $hpsVersion->appendChild($hpsHeader);
@@ -67,7 +71,7 @@ class HpsService {
             curl_setopt($soap_do, CURLOPT_POST, true);
             curl_setopt($soap_do, CURLOPT_POSTFIELDS, $xml->saveXML());
             curl_setopt($soap_do, CURLOPT_HTTPHEADER,     $header);
-            
+
             if($this->config->useProxy){
                 curl_setopt($soap_do, CURLOPT_PROXY, $this->config->proxyOptions['proxy_host']);
                 curl_setopt($soap_do, CURLOPT_PROXYPORT, $this->config->proxyOptions['proxy_port']);
@@ -80,10 +84,10 @@ class HpsService {
                 $ver = "Ver1.0";
                 return $responseObject->$ver;
             }else{
-                throw $this->exceptionMapper->map_sdk_exception(HpsSdkCodes::$unableToProcessTransaction);
+                throw HpsExceptionMapper::map_sdk_exception(HpsSdkCodes::$unableToProcessTransaction);
             }
         }catch (Exception $e){
-            throw $this->exceptionMapper->map_sdk_exception(HpsSdkCodes::$unableToProcessTransaction, $e);
+            throw HpsExceptionMapper::map_sdk_exception(HpsSdkCodes::$unableToProcessTransaction, $e);
         }
     }
 
@@ -102,20 +106,15 @@ class HpsService {
     }
 
     private function _gatewayUrlForKey($apiKey){
-        if ($apiKey != NULL && $apiKey != "" && strpos($apiKey, '_cert_') !== false){
-            return "https://posgateway.cert.secureexchange.net/Hps.Exchange.PosGateway/PosGatewayService.asmx";
+        if ($apiKey != NULL && $apiKey != ""){
+            if( strpos($apiKey, '_cert_') !== false){
+                return "https://posgateway.cert.secureexchange.net/Hps.Exchange.PosGateway/PosGatewayService.asmx";
+            }else{
+                return "https://posgateway.secureexchange.net/Hps.Exchange.PosGateway/PosGatewayService.asmx";
+            }
         }else{
-            return "https://posgateway.secureexchange.net/Hps.Exchange.PosGateway/PosGatewayService.asmx";
+            return $this->config->serviceUri;
         }
-    }
-
-    public function hydrateTransactionHeader($header){
-        $result = new HpsTransactionHeader();
-        $result->gatewayResponseCode = $header['GatewayRspCode'];
-        $result->gatewayResponseMessage = $header['GatewayRspMsg'];
-        $result->responseDt = $header['RspDT'];
-        $result->clientTxnId = $header['GatewayTxnId'];
-        return $result;
     }
 
     private function _XML2Array($xml){

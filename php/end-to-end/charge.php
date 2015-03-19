@@ -41,7 +41,7 @@
     $config->versionNumber = '0000';
     $config->developerId = '000000';
 
-    $chargeService = new HpsChargeService($config);
+    $chargeService = new HpsCreditService($config);
 
     $address = new HpsAddress();
     $address->address = $_GET["Address"];
@@ -74,7 +74,7 @@
     // i'm running windows, so i had to update this:
     //ini_set("SMTP", "my-mail-server");
 
-    SendEmail($_GET['EMAIL'], 'donotreply@e-hps.com', 'Successful Charge!', $body, true);
+    SendEmail($_GET['Email'], 'donotreply@e-hps.com', 'Successful Charge!', $body, true);
 
 
 ?>

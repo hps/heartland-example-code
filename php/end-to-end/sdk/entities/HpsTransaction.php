@@ -11,6 +11,31 @@ class HpsTransaction {
         $this->transactionHeader = $transactionHeader;
     }
 
+    static public function fromDict($rsp,$txnType){
+        // Hydrate the header
+        $transactionHeader = new HpsTransactionHeader();
+        $transactionHeader->gatewayResponseCode = (string)$rsp->Header->GatewayRspCode;
+        $transactionHeader->gatewayResponseMessage = (string)$rsp->Header->GatewayRspMsg;
+        $transactionHeader->responseDt = (string)$rsp->Header->RspDT;
+        $transactionHeader->clientTxnId = (isset($rsp->Header->ClientTxnId) ? (string)$rsp->Header->ClientTxnId : null);
+
+        $transaction = new HpsTransaction($transactionHeader,$txnType);
+        $transaction->transactionId = (string)$rsp->Header->GatewayTxnId;
+        if(isset($rsp->Header->ClientTxnIdSpecified) && $rsp->Header->ClientTxnIdSpecified == true){
+            $transaction->clientTransactionId = (string)$transactionHeader->clientTxnId;
+        }
+
+        // Hydrate the body
+        $item = $rsp->Transaction->$txnType;
+        if($item != null){
+            $transaction->responseCode = (isset($item->RspCode) ? (string)$item->RspCode : null);
+            $transaction->responseText = (isset($item->RspText) ? (string)$item->RspText : null);
+            $transaction->referenceNumber = (isset($item->RefNbr) ? (string)$item->RefNbr : null);
+        }
+
+        return $transaction;
+    }
+
     static public function transactionTypeToServiceName($transactionType){
         switch ($transactionType){
             case HpsTransactionType::$AUTHORIZE :
