@@ -11,7 +11,7 @@ class HpsBatchService extends HpsService{
         $header = $response->Header;
 
         if($header->GatewayRspCode != "0"){
-            throw $this->exceptionMapper->map_gateway_exception($header->GatewayTxnId,$header->GatewayRspCode,$header->GatewayRspMsg);
+            throw HpsExceptionMapper::map_gateway_exception($header->GatewayTxnId,$header->GatewayRspCode,$header->GatewayRspMsg);
         }
 
         $batchClose = $response->Transaction->BatchClose;

@@ -332,6 +332,16 @@
             "mapping_type":"CardException",
             "mapping_code":"processing_error",
             "mapping_message":"Exception_Message_ProcessingError"
+        },
+        {
+            "object":"exception_mapping",
+            "category":"sdk",
+            "exception_codes":[
+                "11"
+            ],
+            "mapping_type":"InvalidRequestException",
+            "mapping_code":"sdk_exception",
+            "mapping_message":"Exception_Message_InvalidConfig"
         }
     ],
     "exception_messages":[
