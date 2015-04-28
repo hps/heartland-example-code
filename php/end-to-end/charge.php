@@ -34,7 +34,7 @@
 
     require_once "sdk/Hps.php";
 
-    $config = new HpsConfiguration();
+    $config = new HpsServicesConfig();
     $config->secretApiKey = 'skapi_cert_MYl2AQAowiQAbLp5JesGKh7QFkcizOP2jcX9BrEMqQ';
 
     // the following variables will be provided to you during certificaiton.
