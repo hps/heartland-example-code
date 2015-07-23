@@ -1,0 +1,3 @@
+[submodule "php/iframe-pay-invoice/sdk"]
+	path = php/iframe-pay-invoice/sdk
+	url = https://github.com/hps/heartland-php
