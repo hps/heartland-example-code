@@ -4,3 +4,6 @@
 [submodule "php/iframe-recurring-signup/sdk"]
 	path = php/iframe-recurring-signup/sdk
 	url = https://github.com/hps/heartland-php
+[submodule "php/recurring-signup-ach/sdk"]
+	path = php/recurring-signup-ach/sdk
+	url = https://github.com/hps/heartland-php
