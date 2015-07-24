@@ -1,3 +1,6 @@
 [submodule "php/iframe-pay-invoice/sdk"]
 	path = php/iframe-pay-invoice/sdk
 	url = https://github.com/hps/heartland-php
+[submodule "php/iframe-recurring-signup/sdk"]
+	path = php/iframe-recurring-signup/sdk
+	url = https://github.com/hps/heartland-php

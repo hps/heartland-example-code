@@ -2,13 +2,14 @@
   $(document).ready(function () {
     var $form = $('#payment_form');
     $form.SecureSubmit({
-      public_key: 'pkapi_cert_P6dRqs1LzfWJ6HgGVZ',
+      public_key: 'pkapi_cert_jKc1FtuyAydZhZfbB3',
       type: 'iframe',
       iframeTarget: '#securesubmit',
       buttonTarget: '#PaymentButton',
       useDefaultStyles: false,
       onTokenSuccess: function (response) {
         $('#token_value').val(response.token_value);
+        $('#card_last_four').val(response.last_four);
         $form.submit();
       },
       onTokenError: function (response) {
