@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://Hps.Exchange.PosGateway">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+    <ns1:PosRequest clientType="" clientVer="">
+      <ns1:Ver1.0>
+        <ns1:Header>
+          <ns1:DeveloperID>123456</ns1:DeveloperID>
+          <ns1:VersionNbr>1234</ns1:VersionNbr>
+          <ns1:SecretAPIKey>skapi_cert_MYl2AQAowiQAbLp5JesGKh7QFkcizOP2jcX9BrEMqQ</ns1:SecretAPIKey>
+        </ns1:Header>
+        <ns1:Transaction>
+          <ns1:CreditAuth>
+            <ns1:Block1>
+              <ns1:CardHolderData>
+                <ns1:CardHolderFirstName>John</ns1:CardHolderFirstName>
+                <ns1:CardHolderLastName>Doe</ns1:CardHolderLastName>
+                <ns1:CardHolderAddr>123 This Way</ns1:CardHolderAddr>
+                <ns1:CardHolderCity>Anytown</ns1:CardHolderCity>
+                <ns1:CardHolderState>Anywhere</ns1:CardHolderState>
+                <!-- CardHolderZip is the minimum to trigger an AVS check -->
+                <ns1:CardHolderZip>12345</ns1:CardHolderZip>
+                <ns1:CardHolderPhone>5555551234</ns1:CardHolderPhone>
+                <ns1:CardHolderEmail>john.doe@example.com</ns1:CardHolderEmail>
+              </ns1:CardHolderData>
+              <ns1:CardData>
+                <ns1:ManualEntry>
+                  <ns1:CardNbr>4242424242424242</ns1:CardNbr>
+                  <ns1:ExpMonth>6</ns1:ExpMonth>
+                  <ns1:ExpYear>2021</ns1:ExpYear>
+                  <ns1:CardPresent>N</ns1:CardPresent>
+                  <ns1:ReaderPresent>N</ns1:ReaderPresent>
+                </ns1:ManualEntry>
+              </ns1:CardData>
+              <ns1:Amt>100</ns1:Amt>
+              <ns1:AllowDup>N</ns1:AllowDup>
+              <ns1:AllowPartialAuth>N</ns1:AllowPartialAuth>
+              <ns1:AdditionalTxnFields>
+                <ns1:Description>test</ns1:Description>
+                <ns1:InvoiceNbr>123456</ns1:InvoiceNbr>
+                <ns1:CustomerID>123</ns1:CustomerID>
+              </ns1:AdditionalTxnFields>
+            </ns1:Block1>
+          </ns1:CreditAuth>
+        </ns1:Transaction>
+      </ns1:Ver1.0>
+    </ns1:PosRequest>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

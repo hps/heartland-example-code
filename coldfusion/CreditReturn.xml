@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://Hps.Exchange.PosGateway">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+    <ns1:PosRequest clientType="" clientVer="">
+      <ns1:Ver1.0>
+        <ns1:Header>
+          <ns1:DeveloperID>123456</ns1:DeveloperID>
+          <ns1:VersionNbr>1234</ns1:VersionNbr>
+          <ns1:SecretAPIKey>skapi_cert_MYl2AQAowiQAbLp5JesGKh7QFkcizOP2jcX9BrEMqQ</ns1:SecretAPIKey>
+        </ns1:Header>
+        <ns1:Transaction>
+          <ns1:CreditReturn>
+            <ns1:Block1>
+              <ns1:GatewayTxnId>6555639</ns1:GatewayTxnId>
+              <ns1:AllowDup>N</ns1:AllowDup>
+              <ns1:Amt>10</ns1:Amt>
+            </ns1:Block1>
+          </ns1:CreditReturn>
+        </ns1:Transaction>
+      </ns1:Ver1.0>
+    </ns1:PosRequest>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
