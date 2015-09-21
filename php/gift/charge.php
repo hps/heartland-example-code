@@ -13,8 +13,6 @@ $giftService = new HpsGiftCardService($config);
 try {
 	$card = new HpsGiftCard();
 	$card->number = $_GET["card-number"];
-	$card->expMonth = $_GET["expiration-month"];
-	$card->expYear = $_GET["expiration-year"];
 
 	$response = $giftService->sale($card, 1.00);
 } catch (HpsException $e) {
