@@ -48,7 +48,7 @@
     
             GetTextFromUrl = oXMLHTTP.responseText
 
-            response.write("<HR>Payment Gateway Resposne Status =" + Cstr(oXMLHTTP.Status) + "<hr>")
+            response.write("<HR>Payment Gateway Response Status =" + Cstr(oXMLHTTP.Status) + "<hr>")
     
             response.write(Server.HTMLEncode(GetTextFromUrl))
             response.Flush
