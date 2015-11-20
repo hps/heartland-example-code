@@ -103,7 +103,7 @@ class HpsService {
 
     private function _gatewayUrlForKey($apiKey){
         if ($apiKey != NULL && $apiKey != "" && strpos($apiKey, '_cert_') !== false){
-            return "https://posgateway.cert.secureexchange.net/Hps.Exchange.PosGateway/PosGatewayService.asmx";
+            return "https://cert.api2.heartlandportico.com/Hps.Exchange.PosGateway/PosGatewayService.asmx";
         }else{
             return "https://posgateway.secureexchange.net/Hps.Exchange.PosGateway/PosGatewayService.asmx";
         }
