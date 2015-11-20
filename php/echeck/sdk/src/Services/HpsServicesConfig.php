@@ -18,7 +18,7 @@ class HpsServicesConfig
     public $siteTrace       = null;
     public $useProxy        = null;
     public $proxyOptions    = null;
-    public $soapServiceUri  = "https://posgateway.cert.secureexchange.net/Hps.Exchange.PosGateway/PosGatewayService.asmx";
+    public $soapServiceUri  = "https://cert.api2.heartlandportico.com/Hps.Exchange.PosGateway/PosGatewayService.asmx";
     public $payPlanBaseUri  = null;
 
     public function serviceUri()
