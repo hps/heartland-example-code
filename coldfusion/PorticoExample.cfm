@@ -47,7 +47,7 @@ i<!--- NOTE: Basic example of a CreditSale SOAP request
     Certification URL is https://posgateway.cert.secureexchange.net/Hps.Exchange.PosGateway/PosGatewayService.asmx
     Production URL is https://posgateway.secureexchange.net/Hps.Exchange.PosGateway/PosGatewayService.asmx--->
 <cfhttp
-  url="https://posgateway.cert.secureexchange.net/Hps.Exchange.PosGateway/PosGatewayService.asmx"
+  url="https://cert.api2.heartlandportico.com/Hps.Exchange.PosGateway/PosGatewayService.asmx"
   method="POST"
   result="gatewayResponse">
   <cfhttpparam type="XML" value="#gatewayRequest#" />
