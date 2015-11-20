@@ -43,7 +43,7 @@
     
             Set oXMLHTTP = CreateObject("MSXML2.ServerXMLHTTP.6.0")
 
-            oXMLHTTP.Open "POST", "https://posgateway.cert.secureexchange.net/Hps.Exchange.PosGateway/PosGatewayService.asmx", False
+            oXMLHTTP.Open "POST", "https://cert.api2.heartlandportico.com/Hps.Exchange.PosGateway/PosGatewayService.asmx", False
             oXMLHTTP.Send objXMLDocument
     
             GetTextFromUrl = oXMLHTTP.responseText
