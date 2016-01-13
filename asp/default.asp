@@ -43,7 +43,12 @@
     
             Set oXMLHTTP = CreateObject("MSXML2.ServerXMLHTTP.6.0")
 
-            oXMLHTTP.Open "POST", "https://cert.api2.heartlandportico.com/Hps.Exchange.PosGateway/PosGatewayService.asmx", False
+            // TLS1.1 Cert URL: 
+            // oXMLHTTP.Open "POST", "https://cert.api2.heartlandportico.com/Hps.Exchange.PosGateway/PosGatewayService.asmx", False
+            // TLS1.0 Cert URL:
+            oXMLHTTP.Open "POST", "https://posgateway.cert.secureexchange.net/Hps.Exchange.PosGateway/PosGatewayService.asmx", False
+            
+            Update-Test-Card-Expiration-Dates
             oXMLHTTP.Send objXMLDocument
     
             GetTextFromUrl = oXMLHTTP.responseText
@@ -251,7 +256,7 @@
             $('#card_number').val('4012002000060016');
             $('#card_cvc').val('123');
             $('#exp_month').val('12');
-            $('#exp_year').val('2015');
+            $('#exp_year').val('2025');
             $('#charge_amount').val('5.00');
         };
     </script>
