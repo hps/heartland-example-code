@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hps="http://Hps.Exchange.PosGateway">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <hps:PosRequest clientType="" clientVer="">
+      <hps:Ver1.0>
+        <hps:Header>
+          <hps:DeveloperID>123456</hps:DeveloperID>
+          <hps:VersionNbr>1234</hps:VersionNbr>
+          <hps:SecretAPIKey>skapi_cert_MYl2AQAowiQAbLp5JesGKh7QFkcizOP2jcX9BrEMqQ</hps:SecretAPIKey>
+        </hps:Header>
+        <hps:Transaction>
+          <hps:CreditAccountVerify>
+            <hps:Block1>
+              <hps:CardHolderData>
+                <hps:CardHolderFirstName>John</hps:CardHolderFirstName>
+                <hps:CardHolderLastName>Doe</hps:CardHolderLastName>
+                <hps:CardHolderAddr>123 This Way</hps:CardHolderAddr>
+                <hps:CardHolderCity>Anytown</hps:CardHolderCity>
+                <hps:CardHolderState>Anywhere</hps:CardHolderState>
+                <!-- CardHolderZip is the minimum to trigger an AVS check -->
+                <hps:CardHolderZip>12345</hps:CardHolderZip>
+                <hps:CardHolderPhone>5555551234</hps:CardHolderPhone>
+                <hps:CardHolderEmail>john.doe@example.com</hps:CardHolderEmail>
+              </hps:CardHolderData>
+              <hps:CardData>
+                <hps:ManualEntry>
+                  <hps:CardNbr>4242424242424242</hps:CardNbr>
+                  <hps:ExpMonth>6</hps:ExpMonth>
+                  <hps:ExpYear>2021</hps:ExpYear>
+                  <hps:CardPresent>N</hps:CardPresent>
+                  <hps:ReaderPresent>N</hps:ReaderPresent>
+                </hps:ManualEntry>
+              </hps:CardData>
+            </hps:Block1>
+          </hps:CreditAccountVerify>
+        </hps:Transaction>
+      </hps:Ver1.0>
+    </hps:PosRequest>
+  </soapenv:Body>
+</soapenv:Envelope>
